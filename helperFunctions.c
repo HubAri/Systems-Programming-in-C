@@ -22,6 +22,15 @@ bool is_valid_player_number(char *arg)
   }
 }
 
+bool is_valid_file(char *arg, char *string)
+{
+  if(strcmp(arg,string) == 0){
+    return false;
+  } else {
+    return true;
+  }
+}
+
 void print_id(char *ptr, int length)
 {
   for(int i = 0; i < length; i++){
