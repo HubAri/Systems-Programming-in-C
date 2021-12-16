@@ -1,7 +1,7 @@
 #include "header.h"
 #include "serverConnectionHeader.h"
 #include "config.h" 
-#include "sharedMemoryFunctions.h"
+//#include "sharedMemoryFunctions.h"
 
 //declare important variables
   char game_id[ID_LEN + 1];
