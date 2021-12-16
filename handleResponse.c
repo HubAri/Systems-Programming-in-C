@@ -103,6 +103,8 @@ char *handle(char *request){
           //char *gamename = substring(request, 0, strlen(request));
           strcat(print, request);
           strcat(print, "\'.");
+          //save gamename in struct
+          //strcpy(serverinfo->nameOfGame, request);
 
           step++;
       

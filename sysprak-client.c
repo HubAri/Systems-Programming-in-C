@@ -1,6 +1,7 @@
 #include "header.h"
 #include "serverConnectionHeader.h"
 #include "config.h" 
+#include "sharedMemoryFunctions.h"
 
 //declare important variables
   char game_id[ID_LEN + 1];
@@ -18,11 +19,22 @@
 
   configparam confiparam;
 
+  int shmID_serverInfo;
+  int shmID_player;
+  int *shmIDplayer;  //hier einmal als Pointer definiert damit die Variable zum attachen benutzt werden kann
+
+  struct serverinfo *serverinfo;
+
 /*How-To-Use: call ./sysprak-client with two obligatory parameters: 
 -g <GAME_ID>  and two optional parameters: -p <PLAYER_NUMBER>
 */
 int main(int argc, char **argv)
 {
+
+  //create SHM Segments for both structs
+  shmID_player = creatingSHM(BUFFERLENGTH*sizeof(int)); //vllt auch stattdessen sizeof(struct player)
+  shmID_serverInfo = creatingSHM(sizeof(struct serverinfo));  
+  
 
   //two parameters are optional, so there are 3 or 5 parameters in total.
   if(argc != 3 && argc != 5) {
@@ -134,9 +146,14 @@ int main(int argc, char **argv)
     //Phase1: the prolog interchange with the server
     performConnection(socket_fd);
     //close(socket_fd);
+
+    //Attach Shared Memory segments
+    serverinfo = attachingSHM(shmID_serverInfo);
+    shmIDplayer = attachingSHM(shmID_player);
   }else {
     //THINKER
-    
+    serverinfo = attachingSHM(shmID_serverInfo);
+    shmIDplayer = attachingSHM(shmID_player);
     
   }
 
