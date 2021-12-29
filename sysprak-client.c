@@ -16,6 +16,7 @@
   int test = 0;
   pid_t pid =0;
 
+
   configparam confiparam;
 
   //Variables for SHM Segments
@@ -108,7 +109,7 @@ int main(int argc, char **argv)
         }
        
       case 'c':
-         if(is_valid_file(optarg,string)){
+         if(is_valid_file(optarg, string)){
         // if(strcmp(optarg,string) != 0){
             memset(confile, '\0', sizeof(confile));
             strcpy(confile, optarg);
@@ -154,6 +155,10 @@ int main(int argc, char **argv)
   portValue = NULL;
   confiparam.portNumber = atoi(portVal);
 
+if(pipe(fd)<0){
+  perror("Error creating pipe");
+  exit(EXIT_FAILURE);
+}
 
  if((pid=fork())<0){
    perror("Error splitting the process");
@@ -168,15 +173,21 @@ int main(int argc, char **argv)
     if ((socket_fd = connectServer()) == -1){
       perror("connection");
     }
+    //Schreibseite der Pip schließen
+    close(fd[1]);
     //Attachen der SHM Bereiche
     serverinfo = attachingSHM(shmID_serverInfo);
     shmIDplayer = attachingSHM(shmID_player);
 
     //Phase1: the prolog interchange with the server
     performConnection(socket_fd);
+    close(fd[0]);
     //close(socket_fd);
   }else {
     //THINKER
+
+    //Leseseite der Pipe schließen
+    close(fd[0]);
 
     //SHM Segmente im Thinker attachen
     serverinfo = attachingSHM(shmID_serverInfo);
@@ -191,6 +202,7 @@ int main(int argc, char **argv)
       perror("Error while waiting for childprocess");
       exit(EXIT_FAILURE);
     }
+    close(fd[1]);
     
     
   }

@@ -19,10 +19,12 @@ int socketData;                                      //überprüft, ob Daten am 
 struct timeval tv;                                   //Struct zum Speichern des Zeitintervalls, in dem auf neue Daten überprüft werden soll
 fd_set readfd;                                       // Menge von Filedeskriptoren, Sinvoll wenn Pipe hinzukommt, daher jetzt schon genutzt
 int retval;
+int pipeData;
 
 
 void performConnection(int fileSock);               //Zuständig für die Prologphase
 void sendResponse(char *response, int fileSock);    //Sendet Antwort an Server 
 void processInformation(char *buffer, int fileSock);
+void processAndSendResponse(char *buffer, int fileSock);
 
 #endif

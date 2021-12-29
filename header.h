@@ -18,6 +18,7 @@
 #define ID_LEN 13
 #define BUFFERLENGTH 512
 #define BUFFERLENGTH_PORT 6 //gegebenenfalls aendern
+#define BUFFERLENGTH_MOVE 25
 #define REQUESTSLENGTH 64 // maximum number of consecutive lines send by the server and stored in one buffer. 
 #define OUR_VERSION "2.3"
 #define VERSION_LEN 16
@@ -37,6 +38,7 @@ int recv_all(int, char *, size_t);
   char player_number[2];
   char player_name[NAME_LEN + 1];
   char cip_version[VERSION_LEN + 1];
+  int fd[2];
 
 
 #endif
