@@ -211,7 +211,7 @@ char *handle(char *request){
           sprintf(point, "%d", playNum1);
           
           
-          serverinfo->restPlayers[countPlayer]->playerNumber = atoi(playNum);
+          serverinfo->restPlayers[countPlayer]->playerNumber = playNum1;
           serverinfo->restPlayers[countPlayer]->ready = atoi(status);
           strcpy(serverinfo->restPlayers[countPlayer]->playerName, playName);
           
@@ -236,6 +236,9 @@ char *handle(char *request){
           }
           if (status != NULL){
             free(status);
+          }
+          if (point != NULL){
+            free(point);
           }
 
          countPlayer++;
