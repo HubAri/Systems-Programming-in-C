@@ -141,17 +141,18 @@ int main(int argc, char **argv)
   char *hostValue = readConfig(paramNameHost, confile);
   memset(confiparam.hostName, '\0', sizeof(confiparam.hostName));
   strcpy(confiparam.hostName,hostValue);
-  hostValue = NULL;
+  free(hostValue);
+
 
   char *gameKindValue = readConfig(paramNameGame, confile);
   memset(confiparam.gameKindName, '\0', sizeof(confiparam.gameKindName));
   strcpy(confiparam.gameKindName,gameKindValue);
-  gameKindValue = NULL;
+  free(gameKindValue);
 
   char *portValue = readConfig(paramNamePort, confile);
   memset(portVal, '\0', sizeof(portVal));
   strcpy(portVal, portValue);
-  portValue = NULL;
+  free(portValue);
   confiparam.portNumber = atoi(portVal);
 
 
