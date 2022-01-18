@@ -2,7 +2,7 @@
 #include "init.h"
 #include "connect.h"
 #include "prolog.h"
-
+/*
   char portVal[BUFFERLENGTH_PORT];
   char *paramNameHost = "hostname";
   char *paramNamePort = "portnumber";
@@ -10,10 +10,11 @@
   char *string = "";
   char confile [100];
   int test = 0;
-  pid_t pid =0;
+ 
 
   configparam confiparam;
-
+*/
+ pid_t pid =0;
   //Variables for SHM Segments
   int shmID_serverInfo;
   int shmID_player;
@@ -63,8 +64,8 @@ int main(int argc, char **argv)
   //read command line parameters 
   if(!get_args(argc, argv)) return 1;
  
-    
- //if(!make_config_file()) return 1;
+ //save configfile data in struct   
+ make_config_file();
 
   
 

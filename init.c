@@ -9,6 +9,17 @@ char cip_version[VERSION_LEN + 1];
 int player_check = 0; 
 
 //variables for config file
+int test=0;
+char portVal[BUFFERLENGTH_PORT];
+char *paramNameHost = "hostname";
+char *paramNamePort = "portnumber";
+char *paramNameGame = "gamekindname";
+char *string = "";
+char confile [100];
+configparam confiparam;
+
+
+
 
 
 bool check_argc(int argc) {
@@ -49,59 +60,60 @@ bool get_args(int argc, char **argv) {
             default:
               break;
             }
+            break;
               
           } else {
             perror("player number incorrect");          
             return false;
           }
         
-      // case 'c':
-      //    if(is_valid_file(optarg,string)){
-      //   // if(strcmp(optarg,string) != 0){
-      //       memset(confile, '\0', sizeof(confile));
-      //       strcpy(confile, optarg);
-      //       printf("The confile is %s. \n", confile);
-      //       test = 1;
-      //   } 
-      // break;
+     case 'c':
+         if(is_valid_file(optarg, string)){
+        // if(strcmp(optarg,string) != 0){
+            memset(confile, '\0', sizeof(confile));
+            strcpy(confile, optarg);
+            printf("The confile is %s. \n", confile);
+            test = 1;
+        } 
+      break;
+
 
       default:
         break;
 
     }
   }
-//   if(test == 0){
-//    const char *conf = "client.conf";
-//     memset(confile, '\0', sizeof(confile));
-//     strcpy(confile, conf);                                                
-//     createClientConfig(confile);
-//     printf("Using \"client.conf\" as confile. \n");
-//  }
+   if(test == 0){
+    const char *conf = "client.conf";
+     memset(confile, '\0', sizeof(confile));
+     strcpy(confile, conf);                                                
+     createClientConfig(confile);
+     printf("Using \"client.conf\" as confile. \n");
+  }
 
   return true;
 
 } 
 
-//bool make_config_file() {
-  // //fill struct
-  // char *hostValue = readConfig(paramNameHost, confile);
-  // memset(confiparam.hostName, '\0', sizeof(confiparam.hostName));
-  // strcpy(confiparam.hostName,hostValue);
-  // hostValue = NULL;
+void make_config_file() {
+  //fill struct
+   char *hostValue = readConfig(paramNameHost, confile);
+   memset(confiparam.hostName, '\0', sizeof(confiparam.hostName));
+   strcpy(confiparam.hostName,hostValue);
+   free(hostValue);
 
-  // char *gameKindValue = readConfig(paramNameGame, confile);
-  // memset(confiparam.gameKindName, '\0', sizeof(confiparam.gameKindName));
-  // strcpy(confiparam.gameKindName,gameKindValue);
-  // gameKindValue = NULL;
+  char *gameKindValue = readConfig(paramNameGame, confile);
+  memset(confiparam.gameKindName, '\0', sizeof(confiparam.gameKindName));
+  strcpy(confiparam.gameKindName,gameKindValue);
+  free(gameKindValue);
 
-  // char *portValue = readConfig(paramNamePort, confile);
-  // memset(portVal, '\0', sizeof(portVal));
-  // strcpy(portVal, portValue);
-  // portValue = NULL;
-  // confiparam.portNumber = atoi(portVal);
- 
-
-//}
+  char *portValue = readConfig(paramNamePort, confile);
+  memset(portVal, '\0', sizeof(portVal));
+  strcpy(portVal, portValue);
+  free(portValue);
+  confiparam.portNumber = atoi(portVal);
+  
+}
 
 char* readConfig(char* name, char *config) {
 

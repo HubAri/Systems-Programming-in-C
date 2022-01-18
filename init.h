@@ -21,3 +21,4 @@ bool get_args(int, char**);
 //functions for config file
 char* readConfig(char *name, char *config);
 void createClientConfig(char *confile);
+void make_config_file();
