@@ -9,4 +9,4 @@ $(MAIN): $(SRCFILES)
 	$(CC) $(CFLAGS) -o $(MAIN) $(SRCFILES)
     
 clean:
-	rm -f *.o $(MAIN)
+	rm -f *.o
