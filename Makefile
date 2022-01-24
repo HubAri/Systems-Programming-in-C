@@ -9,5 +9,6 @@ $(MAIN): $(SRCFILES)
 	$(CC) $(CFLAGS) -o $(MAIN) $(SRCFILES)
     
 clean:
-	rm -f *.o 
+	rm -f $(MAIN)
+	echo Clean done 
 
