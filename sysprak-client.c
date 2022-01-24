@@ -168,7 +168,7 @@ void thinker() {
   freePieces[nextPiece] = -1;
   write(pfds[1], nextMove, 16);
   }
-  //reset flag to initial state
+  //reset flag to initial state 
   serverinfo->calcFlag = 0;
   
 }

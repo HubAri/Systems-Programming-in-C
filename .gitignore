@@ -6,3 +6,5 @@
 *.conf
 sysprak-client
 test.c
+build
+sysprak-abgabe.sh
