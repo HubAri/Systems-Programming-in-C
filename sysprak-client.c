@@ -111,7 +111,7 @@ int main(int argc, char **argv)
     if(!prolog(socket_fd)) return 1;
 
     //game phase 
-    if(!game(socket_fd)) return 1;
+    if(!game(socket_fd, pfds[0])) return 1;
     
 
     close(socket_fd);

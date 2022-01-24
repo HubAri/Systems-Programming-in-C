@@ -25,6 +25,6 @@ void performConnection(int fileSock);               //Zuständig für die Prolog
 void sendResponse(char *response, int fileSock);    //Sendet Antwort an Server 
 void processInformation(char *buffer, int fileSock);
 bool prolog(int);
-bool game(int);
+bool game(int, int);
 
 #endif

@@ -5,6 +5,7 @@
 #include "handleResponse.h"
 #include <unistd.h>
 #include "thinker.h"
+#include "game.h"
 
 //Variables from the game phase:
 int moveTime;
@@ -24,7 +25,7 @@ int width;
 
 
 
-bool game(int socket_fd) {
+bool game(int socket_fd, int pipe_fd) {
 
   char *line = (char*) malloc(BUFFERLENGTH*sizeof(char));
   char msg[64];
@@ -42,6 +43,24 @@ bool game(int socket_fd) {
   bool skipReading = false; 
 
   while(true) {
+
+    FD_ZERO(&readfd);                                                          //Macht das Set frei
+    FD_SET(socket_fd, &readfd);                                                     //Fügt dem Set den Socket hinzu (die Gameserververbindung)
+    FD_SET(pipe_fd, &readfd);                                                    //Fügt dem Set die Pipe hinzu (Leseseite!)
+
+    tv.tv_sec = 1;                                                              //Sekunden
+    tv.tv_usec = 0;   
+      
+    retval = select(sizeof(readfd)*2, &readfd, NULL, NULL, &tv);     
+    if(retval == -1){
+      perror("select()");
+      exit(EXIT_FAILURE);
+    }else if(retval){
+      pipeData = FD_ISSET(pipe_fd, &readfd);                                     //ISSET testet, ob an DIESER PIPE etwas ansteht
+      socketData = FD_ISSET(socket_fd, &readfd);
+    }
+    if(socketData != 0){
+
     
     if(!skipReading) {
 
@@ -156,10 +175,10 @@ bool game(int socket_fd) {
 
           //get response from Thinker. Now its just a test message but later its going to be the nextNove
           
-          read(pfds[0], nextMove, 16);
-          printf("message from thinker: %s\n", nextMove);
+          //read(pfds[0], nextMove, 16);
+          //printf("message from thinker: %s\n", nextMove);
           phase = 3;
-          skipReading = true;
+          //skipReading = true;
           break;
         }
 
@@ -239,18 +258,8 @@ bool game(int socket_fd) {
 
       //Make move:  
       case 3:
-        if(skipReading) {
-          
-          
-          printf("nextMove: %s\n", nextMove);
-
-          if(write(socket_fd, nextMove, strlen(nextMove))== -1) {
-            perror("sending msg to server");
-            return false;
-          }
-
-          skipReading = false;
-        } else if(match(line + 2, "^MOVEOK$")) {
+        
+         if(match(line + 2, "^MOVEOK$")) {
           phase = 0;
           break;
 
@@ -261,6 +270,20 @@ bool game(int socket_fd) {
       
       default:
       break;
+    }
+    if(pipeData!=0){ 
+      read(pfds[0], nextMove, 16);
+      printf("message from thinker: %s\n", nextMove);
+      printf("nextMove: %s\n", nextMove);
+
+      if(write(socket_fd, nextMove, strlen(nextMove))== -1) {
+        perror("sending msg to server");
+        return false;
+      }
+
+      
+
+    }
     }
 
     
