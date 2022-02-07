@@ -7,7 +7,7 @@
 
 #include "header.h"
 
-//Rechte und Key des SHM-Segments
+//Rights and Key of SHM segments
 #define SMHKEY IPC_PRIVATE
 #define PERMISSIONS 0644
 
@@ -15,7 +15,7 @@ struct serverinfo{
     char nameOfGame[BUFFERLENGTH];
     int  assignedPlayerNumber;
     int totalPlayers;
-    char ourPlayerName[BUFFERLENGTH]; // Hier eventuell stattdessen struct player und dort auch unseren Player hinzufügen, bereit würde auch fehlen
+    char ourPlayerName[BUFFERLENGTH]; 
     struct player *restPlayers[BUFFERLENGTH];
     pid_t connector;
     pid_t thinker;

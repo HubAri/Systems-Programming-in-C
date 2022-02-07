@@ -1,14 +1,10 @@
 #include "header.h"
 #include "init.h"
-#include "connect.h"
 #include "prolog.h"
-#include "game.h"
 #include "config.h"
+#include "thinker.h"
 
-  //Variables fpr config file
-  
 
-  
   
   
   pid_t pid =0;

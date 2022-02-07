@@ -1,5 +1,8 @@
+#ifndef header
+#define header
 
 //standard libraries that anyone could need
+#include <sys/wait.h>
 #include <stdio.h>    
 #include <stdlib.h>   
 #include <unistd.h>   
@@ -9,11 +12,12 @@
 #include <ctype.h>
 #include <time.h>
 #include <signal.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <arpa/inet.h>
+#include <sys/time.h>
 
-#ifndef header
-#define header
-
-#include <sys/wait.h>
 
 
 
@@ -24,11 +28,13 @@
 #define HOSTNAME "sysprak.priv.lab.nm.ifi.lmu.de"
 #define ID_LEN 13
 #define BUFFERLENGTH 512
-#define BUFFERLENGTH_PORT 6 //gegebenenfalls aendern
+#define BUFFERLENGTH_PORT 6 
 #define REQUESTSLENGTH 64 // maximum number of consecutive lines send by the server and stored in one buffer. 
 #define OUR_VERSION "2.3"
 #define VERSION_LEN 16
 #define NAME_LEN 64
+
+int connectServer(void);
 
 void save_config_data();
 

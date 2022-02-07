@@ -1,5 +1,5 @@
 #include "config.h"
-#include "header.h"
+
 
 char portVal[BUFFERLENGTH_PORT];
 char *paramNameHost = "hostname";

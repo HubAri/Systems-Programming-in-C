@@ -1,3 +1,8 @@
+#ifndef think
+#define think
+
+#include "header.h"
+
 int free_squares[16];
 
 bool is_winning_move(int, int, int height, int width, int[height][width]);
@@ -12,3 +17,5 @@ void chooseNextOpponentPiece();
 
 void convert_coordinates(int, int, int, char[]);
 void insertNextMove(char[], char[]);
+
+#endif

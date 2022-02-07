@@ -1,8 +1,4 @@
-#include "performConnection.h"
-#include "handleRequest.h"
 #include "prolog.h"
-#include <unistd.h>
-#include "handleResponse.h"
 
 //Variables for handle()
 int step = 1;
@@ -31,10 +27,10 @@ bool prolog(int socket_fd) {
       if(response == NULL) {
       continue;
       }
-      //Antwort an Server schicken
+      //send response to server
       send(socket_fd,response, strlen(response),0);                        
             
-      //Gesendete Antwort ausgeben
+      //print response
       printf("C: %s",response);
       free(response);
 
@@ -153,8 +149,7 @@ char *handle(char *request){
           strcat(response, player_number); 
 
           strcpy(print, "Diese Partie trägt den Namen : \'");
-          strcpy(serverinfo->nameOfGame, request); //speichere Spielenamen im Struct
-          //char *gamename = substring(request, 0, strlen(request));
+          strcpy(serverinfo->nameOfGame, request); //save the name of the game at struct serverinfo
           strcat(print, request);
           strcat(print, "\'.");
 
@@ -177,11 +172,7 @@ char *handle(char *request){
           char *pointer=malloc(sizeof(char)+1);
           sprintf(pointer, "%d", playNum1); 
                           
-
-
-
-          
-              
+          //print server message
 
           strcpy(print, "Du (");
           strcat(print, playname );
@@ -222,7 +213,7 @@ char *handle(char *request){
 
           char *totalPlayer = substring(request, 6, strlen(request));
           int anz = atoi(totalPlayer);
-          serverinfo->totalPlayers = atoi(totalPlayer); //Totale Anzahl der Spieler ins Struct
+          serverinfo->totalPlayers = atoi(totalPlayer); 
           if(anz > 1){
             strcpy(print, "Es nehmen ");
           }else{

@@ -7,6 +7,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "header.h"
+
 int result;
 
 int match(const char *string, char *pattern);

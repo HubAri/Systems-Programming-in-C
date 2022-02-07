@@ -1,13 +1,11 @@
-#include "performConnection.h"
+
 #include "handleRequest.h"
 #include "prolog.h"
 #include "header.h"
 #include "handleResponse.h"
-#include <unistd.h>
 #include "thinker.h"
-#include <sys/time.h>
-#include <sys/types.h>
-#include <unistd.h>
+
+
 
 //Variables from the game phase:
 int moveTime;

@@ -1,6 +1,4 @@
-#include "header.h"
 #include "init.h"
-#include "config.h"
 
 //Variables for command line arguments
 char game_id[ID_LEN + 1];
