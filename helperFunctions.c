@@ -88,7 +88,7 @@ void print_board(int height, int width, int board[height][width]) {
     printf("|\n");
   }
   puts("   ------------");
-  puts("Remainig pieces: ");
+  puts("Remaining pieces: ");
   for(int i = 0; i < 16; i++) {
     if(freePieces[i] == -1) {
       printf(" * ");
@@ -154,7 +154,7 @@ void print_board_binary(int height, int width, int board[height][width]) {
     printf("|\n");
   }
   puts("   ------------------------");
-  puts("Remainig pieces: ");
+  puts("Remaining pieces: ");
   for(int i = 0; i < 16; i++) {
     if(freePieces[i] == -1) {
       printf(" * ");
