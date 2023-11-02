@@ -8,3 +8,12 @@ Additionally, there are several header files and some files containing helper fu
 Authors: Lorena Wemmer, Arian Moharramzadeh, Tobias Rohe, Isabella Debelic und Alexander Stadelmann
 
 Tutor: Rufus Maiwald
+
+# How To Use
+
+call: 
+```
+./sysprak-client with two parameters: -g <GAME_ID> <br/>
+Additionally you may add:  -p <PLAYER_NUMBER> or -c <config_file>
+```
+NOTE: Need to connect to LMU gameserver (via VPN) to access frontend / game in browser. Client can then be connected.
